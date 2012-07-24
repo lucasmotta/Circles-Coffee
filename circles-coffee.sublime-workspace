@@ -1,0 +1,578 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"_cli",
+				"_clickY"
+			],
+			[
+				"_pos",
+				"_posX"
+			],
+			[
+				"_mom",
+				"_momentumX"
+			],
+			[
+				"mom",
+				"momentumY"
+			],
+			[
+				"_cen",
+				"_centerX"
+			],
+			[
+				"moment",
+				"momentumX"
+			],
+			[
+				"li",
+				"li	<li>"
+			],
+			[
+				"ul",
+				"ul	Tag"
+			],
+			[
+				"a",
+				"a	Tag"
+			],
+			[
+				"img",
+				"img	Tag"
+			],
+			[
+				"margin",
+				"margin	margin: V H"
+			],
+			[
+				"padd",
+				"padding	padding: V H"
+			],
+			[
+				"displ",
+				"display	display: inline"
+			],
+			[
+				"letter",
+				"letter	letter-spacing: px"
+			],
+			[
+				"_sec",
+				"_sectionsIds"
+			],
+			[
+				"_",
+				"_content"
+			],
+			[
+				"hea",
+				"header	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "deploy/index.html",
+			"settings":
+			{
+				"buffer_size": 1575,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/App.coffee",
+			"settings":
+			{
+				"buffer_size": 18,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/CoffeeScript.sublime-build",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"jquery",
+				"Set Syntax: jQuery (JavaScript)"
+			],
+			[
+				"Instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Commit",
+				"Set Syntax: Git Commit Message"
+			],
+			[
+				"color",
+				"Color picker"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"snipp",
+				"Snippet: html"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/index.html",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/CoffeeScript.sublime-build",
+		"/Users/lucasmotta/.htaccess",
+		"/Users/lucasmotta/Google Drive/Lab/circles/content/step01.html",
+		"/Users/lucasmotta/Google Drive/Lab/circles/Rules",
+		"/Users/lucasmotta/Google Drive/Lab/circles/output/step01/index.html",
+		"/Users/lucasmotta/Google Drive/Lab/circles/output/index.html",
+		"/Users/lucasmotta/Google Drive/Lab/circles/static/assets/css/step01.css",
+		"/Users/lucasmotta/Projects/VictorinoxFlash/deploy/data/en/labels.xml",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Alignment/Default (OSX).sublime-keymap",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Base File.sublime-settings",
+		"/Users/lucasmotta/Google Drive/Lab/circles/static/assets/js/main.js",
+		"/Users/lucasmotta/Google Drive/Lab/circles/content/step01.css",
+		"/Users/lucasmotta/Google Drive/Lab/circles/content/stylesheet.css",
+		"/Users/lucasmotta/Projects/VictorinoxFlash/deploy/js/jquery",
+		"/Users/lucasmotta/Google Drive/Lab/circles/config.yaml",
+		"/Users/lucasmotta/Google Drive/Lab/circles/lib/static.rb",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/lucasmotta/Google Drive/Lab/circles/content/index.html",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/lucasmotta/Google Drive/Lab/lines/lib/default.rb",
+		"/Users/lucasmotta/Google Drive/Lab/lines/Rules",
+		"/Users/lucasmotta/Google Drive/Lab/lines/content/angelo.html",
+		"/Users/lucasmotta/Google Drive/Lab/lines/content/step1.html",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/fr/labels.xml",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev/index.html",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev/css/main.css",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev/css/1140.css",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev/css/480.css",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev/js/script.js",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev/js/jquery.imagefit.js",
+		"/Users/lucasmotta/Projects/Personal/Tverde/README.markdown",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev 2/css/styles.css",
+		"/Users/lucasmotta/Projects/Personal/Tverde/dev 2/index.html",
+		"/Users/lucasmotta/Personal/Tverde/dev/index.html",
+		"/Users/lucasmotta/Personal/Tverde/dev/css/main.css",
+		"/Users/lucasmotta/Personal/Tverde/dev/css/normalize.css",
+		"/Users/lucasmotta/Personal/Tverde/dev/js/protoFluid3.02.js",
+		"/Users/lucasmotta/Personal/Tverde/dev/js/jquery-1.7.2.min.js",
+		"/Users/lucasmotta/Personal/Tverde/dev/js/css3-mediaqueries.js",
+		"/Users/lucasmotta/Personal/Tverde/dev/css/ie.css",
+		"/Users/lucasmotta/Downloads/gridpak-1/demo/gridpak.demo.css",
+		"/Users/lucasmotta/Downloads/gridpak-1/gridpak.css",
+		"/Users/lucasmotta/Downloads/gridpak-1/demo/index.html",
+		"/Users/lucasmotta/Personal/Tverde/dev/css/1140.css",
+		"/Users/lucasmotta/Personal/Tverde/dev/css/frameless.css",
+		"/Users/lucasmotta/Personal/Tverde/dev/frameless.html",
+		"/Users/lucasmotta/Personal/Tverde/dev/GGS.html",
+		"/Users/lucasmotta/Personal/Tverde/dev/css/GGS.css",
+		"/Users/lucasmotta/Personal/Tverde/dev/js/GGS.js",
+		"/Applications/FDT 5.app/Contents/MacOS/eclipse.ini",
+		"/Users/lucasmotta/Projects/ISOIFacebook/deploy/lang.html",
+		"/Users/lucasmotta/Downloads/labels4_BrazPortuguese_b.xml",
+		"/Users/lucasmotta/Downloads/labels_missing_br.xml",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/pt-br/labels.xml",
+		"/Users/lucasmotta/Downloads/labels4_BrazPortuguese_a.xml",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/pt-br/subtitles.xml",
+		"/Users/lucasmotta/Downloads/InsanelyDriven_BrazPort_Div.xml",
+		"/Users/lucasmotta/Downloads/InsanelyDriven_Russian_Div.xml",
+		"/Users/lucasmotta/Downloads/InsanelyDriven_Russian_Div_2.xml",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/fr/subtitles.xml",
+		"/Users/lucasmotta/Downloads/InsanelyDriven_French_Div.xml",
+		"/Users/lucasmotta/Projects/ISOIFacebook/deploy/assets/xml/en/about.xml",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/en/labels.xml",
+		"/Users/lucasmotta/Projects/ISOIFacebook/deploy/assets/xml/navigation.xml",
+		"/Users/lucasmotta/Desktop/test.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/shapes/Box.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/BoxMan.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/Demo.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/Preload.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/RemoveButton.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/Vehicle.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/WorldBuoyancy.as",
+		"/Users/lucasmotta/Downloads/jesses-wck-5945c35/demo/BoxAndCircle.as",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/fb/en-gb/index.html",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/newfacebook/en-gb/index.html",
+		"/Users/lucasmotta/Projects/Nugget/README.markdown",
+		"/Users/lucasmotta/Personal/TatiBarreto/README.markdown",
+		"/Users/lucasmotta/Desktop/labels/labels_missing.xml",
+		"/Users/lucasmotta/Desktop/labels_missing.xml",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/ru/subtitles.xml",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/data/en/subtitles.xml",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/BufferScroll/BufferScroll.sublime-settings",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/fb/index.html",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/fb/trailer.html",
+		"/Users/lucasmotta/Projects/Nugget/.gitignore",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/fb/js/libs/jquery-1.7.1.min.js",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/fb/css/global.css",
+		"/Users/lucasmotta/Projects/InSearchOfInsanity/deploy/html/fb/js/script.js",
+		"/Users/lucasmotta/Experiments/LessRainHTML/js/plugins.js",
+		"/Users/lucasmotta/Experiments/LessRainHTML/css/global.css",
+		"/Users/lucasmotta/Experiments/LessRainHTML/js/libs/jquery.easing.1.3.js",
+		"/Users/lucasmotta/Experiments/LessRainHTML/js/libs/crossroads.min.js",
+		"/Users/lucasmotta/Experiments/LessRainHTML/js/script.js",
+		"/Users/lucasmotta/Experiments/LessRainHTML/css/style.css",
+		"/Users/lucasmotta/Experiments/LessRainHTML/index.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"",
+			"99FFCC",
+			"<open files>",
+			"",
+			"<open files>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ff6666",
+			"radiussize",
+			"radius",
+			".radius",
+			"display",
+			".display",
+			"console",
+			"padding",
+			"console",
+			"x()",
+			"../",
+			"F03",
+			"data_",
+			"font",
+			"  ",
+			"spaces",
+			"indent",
+			"tab",
+			"  ",
+			"h3",
+			"h2",
+			"font-w",
+			"imgs",
+			"options",
+			"img",
+			".3s",
+			"font-siz",
+			"font-w",
+			"'",
+			"container",
+			"twoway",
+			"three",
+			"twoway",
+			"direct-low-bullet-three",
+			"tooltip_close_controls",
+			"cool-headed-low-bullet-one",
+			"</p>",
+			"0\">",
+			"1\">",
+			"Я вертолетик-то ненастоящий.",
+			"Не стесняйся. Дотронься до экрана.",
+			"Я вертолетик-то ненастоящий.",
+			"Как ты поступишь?",
+			"aimeras",
+			"re que tu aimeras",
+			"ère que tu aimeras",
+			"J'espère que tu aimeras",
+			"aimerez",
+			"es aimerez",
+			"les aimerez",
+			"J'espère que vous les aimerez",
+			"que vous les aimere",
+			"J'espère que vous les aimerez",
+			"Allez courage, c'est un sacrifice nécessaire",
+			"<BR>",
+			"shift+k",
+			"line",
+			"shift+k",
+			"command+",
+			"command",
+			"<br />",
+			"</ br>",
+			"		",
+			"загрузка",
+			"_blank",
+			"scrollTop",
+			"rema",
+			"reman",
+			"_doc.he",
+			"onSnapCompleted",
+			"console",
+			"margin",
+			"80",
+			"_current",
+			"s",
+			"rect",
+			"350",
+			"signa"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"assets/",
+			"99FFCC",
+			"	",
+			"h2",
+			"h3",
+			".15s",
+			"\"",
+			"]]></p>",
+			"0\"><![CDATA[",
+			"<br>"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "deploy/index.html",
+					"settings":
+					{
+						"buffer_size": 1575,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								665,
+								665
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "744a8499",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "source/App.coffee",
+					"settings":
+					{
+						"buffer_size": 18,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18,
+								18
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "fd4b9bdd",
+							"syntax": "Packages/CoffeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.371293668122,
+			0.652068094978,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"js/libs/jquery-1.7.1.min.js"
+			],
+			[
+				"global",
+				"css/global.css"
+			],
+			[
+				"scri",
+				"js/script.js"
+			],
+			[
+				"style",
+				"css/style.css"
+			],
+			[
+				"plu",
+				"js/plugins.js"
+			],
+			[
+				"jqu",
+				"js/libs/jquery.easing.1.3.js"
+			],
+			[
+				"cros",
+				"js/libs/crossroads.min.js"
+			],
+			[
+				"globa",
+				"css/global.css"
+			],
+			[
+				"scr",
+				"js/script.js"
+			],
+			[
+				"glo",
+				"css/global.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 270.0,
+	"status_bar_visible": true
+}

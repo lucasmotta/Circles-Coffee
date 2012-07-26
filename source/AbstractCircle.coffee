@@ -40,12 +40,12 @@ class AbstractCircle extends Point
 		@center			= new Point()
 		@clickPos		= new Point()
 
-		@setPos($(@container).width() * Math.random(), $(@container).height() * Math.random())
-		$(@display).css("display":"inline", "width":@radius * 2, "height":@radius * 2, "background-color":@color)
+		@setPos(@container.width() * Math.random(), @container.height() * Math.random())
+		@display.css("display":"inline", "width":@radius * 2, "height":@radius * 2, "background-color":@color)
 
-		@content		= $(@display).find("span")
-		@contentHeight	= $(@content).height()
-		@contentWidth	= $(@content).width()
+		@content		= $(@display.find("span"))
+		@contentHeight	= @content.height()
+		@contentWidth	= @content.width()
 		@changed		= new signals.Signal()
 
 		@setupEvents()
@@ -71,7 +71,7 @@ class AbstractCircle extends Point
 	setPos: (x, y) ->
 		@x = @position.x = x
 		@y = @position.y = y
-		$(@display).css("left":@x, "top":@y)
+		@display.css("left":@x, "top":@y)
 
 	###
 	Update the position of your item based on the given center position
@@ -90,6 +90,23 @@ class AbstractCircle extends Point
 		@position.y	+= @momentum.y
 
 	###
+	Compare two different items and sort their positions to avoid colisions
+	@param		b 				Item to compare
+	###
+	compare: (b) ->
+		return if @fixed
+		angle		= @center.angleTo(b.center)
+		distance	= @center.distanceTo(b.center)
+		margin		= 20
+		minDistance	= @radius + b.radius + margin
+		force		= 1
+
+		if(distance < minDistance)
+			@position.x	+= Math.sin(angle) * (minDistance - distance) * force
+			@position.y	+= Math.cos(angle) * (minDistance - distance) * force
+		@
+
+	###
 	Update the DOM object with the radius
 	###
-	updateRadius: => $(@display).css("width":@radius * 2, "height":@radius * 2)
+	updateRadius: => @display.css("width":@radius * 2, "height":@radius * 2)

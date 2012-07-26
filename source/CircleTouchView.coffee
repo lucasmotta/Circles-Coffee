@@ -2,6 +2,9 @@ class CircleTouchView extends AbstractCircle
 	
 	touch 					: null
 	touchId					: 0
+	pinching				: false
+	pinchingDistance		: 0
+	clickRadius				: 0
 
 	constructor: (@display, @color = "#F66", @container, @isTouchScreen) ->
 		super(@display, @color, @container)
@@ -15,10 +18,10 @@ class CircleTouchView extends AbstractCircle
 		@y	-= (@y - @position.y) * .1
 		@center.x = @x + @radius
 		@center.y = @y + @radius
-		$(@content).css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
+		@content.css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
 		return if @dragging
-		$(@display).css("left", @x)
-		$(@display).css("top", @y)
+		@display.css("left", @x)
+		@display.css("top", @y)
 
 	updateRadius: =>
 		super()
@@ -29,25 +32,33 @@ class CircleTouchView extends AbstractCircle
 		###
 		Touch Start
 		###
-		$(@display).bind "touchstart", (event) =>
-			@touchId	= event.originalEvent.touches.length - 1
-			@touch 		= event.originalEvent.touches[@touchId]
-			@fixed		= true
+		@display.bind "touchstart", (event) =>
+			touches 	= event.originalEvent.touches
+			@touchId	= touches.length - 1
+			@touch 		= touches[@touchId]
+			@pinching	= touches.length == 2
+			@clickRadius= @radius
+
+			if(@pinching)
+				@pinchingDistance = new Point(touches[0].pageX, touches[0].pageY).distanceTo(new Point(touches[1].pageX, touches[1].pageY))
+
+			return if @dragging
+
 			@dragging	= true
 			@over		= true
-			@clickPos.x	= $(@container).position().left
-			@clickPos.y	= $(@container).position().top
+			@clickPos.x	= @container.position().left
+			@clickPos.y	= @container.position().top
 
 			TweenLite.to(@, .5, { radius:@originalRadius + 20, ease:Quart.easeOut, onUpdate:@updateRadius });
 
 			###
 			Touch End
 			###
-			$(@display).bind "touchend", (event) =>
-				@fixed		= false
+			@display.bind "touchend", (event) =>
 				@over		= false
 				@dragging	= false
 				@touch 		= null
+				@pinching	= event.originalEvent.touches.length == 2
 
 				TweenLite.to(@, .5, { radius:@originalRadius, ease:Quart.easeOut, onUpdate:@updateRadius });
 
@@ -58,7 +69,16 @@ class CircleTouchView extends AbstractCircle
 			Touch Move
 			###
 			$(window).bind "touchmove", (event) =>
-				@fixed	= false
-				@setPos(@touch.pageX - @clickPos.x - @radius, @touch.pageY - @clickPos.y - @radius)
+				touches 	= event.originalEvent.touches
+				distance 	= 0
+				if @pinching
+					distance = new Point(touches[0].pageX, touches[0].pageY).distanceTo(new Point(touches[1].pageX, touches[1].pageY))
+					@radius = @originalRadius = distance - @pinchingDistance + @clickRadius
+					@updateRadius()
+					@center.x = @x + @radius
+					@center.y = @y + @radius
+					@content.css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
+				else
+					@setPos(@touch.pageX - @clickPos.x - @radius, @touch.pageY - @clickPos.y - @radius)
 			@
 		@

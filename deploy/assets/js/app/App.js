@@ -6,16 +6,15 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   $(function() {
-    var _this = this;
     this.window = $(window);
     this.main = $("#main");
     this.navigation = $("#navigation");
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
-    $(window).resize(function() {
-      var padding;
-      return padding = parseFloat(_this.main.css("padding-left")) * 2;
-    });
-    $(window).trigger("resize");
+    if (!this.isMobile) {
+      this.navigation.css({
+        "display": "block"
+      });
+    }
     document.body.addEventListener("touchmove", function(event) {
       return event.preventDefault();
     });
@@ -134,16 +133,16 @@
       this.position = new Point();
       this.center = new Point();
       this.clickPos = new Point();
-      this.setPos($(this.container).width() * Math.random(), $(this.container).height() * Math.random());
-      $(this.display).css({
+      this.setPos(this.container.width() * Math.random(), this.container.height() * Math.random());
+      this.display.css({
         "display": "inline",
         "width": this.radius * 2,
         "height": this.radius * 2,
         "background-color": this.color
       });
-      this.content = $(this.display).find("span");
-      this.contentHeight = $(this.content).height();
-      this.contentWidth = $(this.content).width();
+      this.content = $(this.display.find("span"));
+      this.contentHeight = this.content.height();
+      this.contentWidth = this.content.width();
       this.changed = new signals.Signal();
       this.setupEvents();
     }
@@ -183,7 +182,7 @@
     AbstractCircle.prototype.setPos = function(x, y) {
       this.x = this.position.x = x;
       this.y = this.position.y = y;
-      return $(this.display).css({
+      return this.display.css({
         "left": this.x,
         "top": this.y
       });
@@ -212,12 +211,35 @@
     };
 
     /*
+    	Compare two different items and sort their positions to avoid colisions
+    	@param		b 				Item to compare
+    */
+
+
+    AbstractCircle.prototype.compare = function(b) {
+      var angle, distance, force, margin, minDistance;
+      if (this.fixed) {
+        return;
+      }
+      angle = this.center.angleTo(b.center);
+      distance = this.center.distanceTo(b.center);
+      margin = 20;
+      minDistance = this.radius + b.radius + margin;
+      force = 1;
+      if (distance < minDistance) {
+        this.position.x += Math.sin(angle) * (minDistance - distance) * force;
+        this.position.y += Math.cos(angle) * (minDistance - distance) * force;
+      }
+      return this;
+    };
+
+    /*
     	Update the DOM object with the radius
     */
 
 
     AbstractCircle.prototype.updateRadius = function() {
-      return $(this.display).css({
+      return this.display.css({
         "width": this.radius * 2,
         "height": this.radius * 2
       });
@@ -237,24 +259,27 @@
 
     AppView.prototype.id = 0;
 
+    AppView.prototype.container = null;
+
     AppView.prototype.currentItem = null;
 
     AppView.prototype.isTouchScreen = false;
 
     /*
     	An <ul> id that contains all the list items (<li>)
-    	@param		container		Id of your list
+    	@param		container_id	Id of your list
     */
 
 
-    function AppView(container) {
-      this.container = container;
+    function AppView(container_id) {
+      this.container_id = container_id;
       this.onItemSelected = __bind(this.onItemSelected, this);
 
       this.updateItems = __bind(this.updateItems, this);
 
+      this.container = $(this.container_id);
       this.isTouchScreen = "ontouchstart" in document.documentElement;
-      this.center = new Point($(this.container).width() * .5, $(this.container).height() * .5);
+      this.center = new Point(this.container.width() * .5, this.container.height() * .5);
       this.setupItems();
       this.id = setInterval(this.updateItems, 30);
     }
@@ -266,38 +291,14 @@
 
     AppView.prototype.setupItems = function() {
       var CircleClass, c, i, list;
-      list = $(this.container).children();
+      list = this.container.children();
       i = list.length;
       c = null;
       CircleClass = (this.isTouchScreen ? CircleTouchView : CircleView);
       while (i-- > 0) {
-        c = new CircleClass(list[i], this.colors[i % this.colors.length], this.container);
+        c = new CircleClass($(list[i]), this.colors[i % this.colors.length], this.container);
         c.changed.add(this.onItemSelected);
         this.items.push(c);
-      }
-      return this;
-    };
-
-    /* ge
-    	Compare two different items and sort their positions to avoid colisions
-    	@param		a 				First item
-    	@param		b 				Second item to compare with "a"
-    */
-
-
-    AppView.prototype.compareItems = function(a, b) {
-      var angle, distance, force, margin, minDistance;
-      if (a.fixed) {
-        return;
-      }
-      angle = a.center.angleTo(b.center);
-      distance = a.center.distanceTo(b.center);
-      margin = 20;
-      minDistance = a.radius + b.radius + margin;
-      force = .8;
-      if (distance < minDistance) {
-        a.position.x += Math.sin(angle) * (minDistance - distance) * force;
-        a.position.y += Math.cos(angle) * (minDistance - distance) * force;
       }
       return this;
     };
@@ -313,15 +314,15 @@
       i = 0;
       j = 0;
       item = null;
-      this.center.x = $(this.container).width() * .5;
-      this.center.y = $(this.container).height() * .5;
+      this.center.x = this.container.width() * .5;
+      this.center.y = this.container.height() * .5;
       while (i < length) {
         j = 0;
         this.items[i].update(this.center);
         while (j < length) {
           if (i !== j) {
             if (this.items[i].priority <= this.items[j].priority) {
-              this.compareItems(this.items[i], this.items[j]);
+              this.items[i].compare(this.items[j]);
             }
           }
           j++;
@@ -363,7 +364,7 @@
     }
 
     CircleView.prototype.setPos = function(x, y) {
-      TweenLite.killTweensOf($(this.display));
+      TweenLite.killTweensOf(this.display);
       return CircleView.__super__.setPos.call(this, x, y);
     };
 
@@ -379,14 +380,14 @@
       this.y -= (this.y - this.position.y) * .1;
       this.center.x = this.x + this.radius;
       this.center.y = this.y + this.radius;
-      $(this.content).css({
+      this.content.css({
         "top": this.radius - this.contentHeight * .5,
         "left": this.radius - this.contentWidth * .5
       });
       if (this.dragging) {
         return;
       }
-      return TweenLite.to($(this.display), 1, {
+      return TweenLite.to(this.display, .2, {
         css: {
           left: this.x,
           top: this.y
@@ -401,7 +402,7 @@
       */
 
       var _this = this;
-      $(this.display).mouseenter(function() {
+      this.display.mouseenter(function() {
         if (_this.fixed) {
           return;
         }
@@ -414,14 +415,14 @@
           ease: Quart.easeOut,
           onUpdate: _this.updateRadius
         });
-        $(_this.display).css("cursor", "pointer");
+        _this.display.css("cursor", "pointer");
         return _this;
       });
       /*
       		Roll Out
       */
 
-      $(this.display).mouseleave(function() {
+      this.display.mouseleave(function() {
         if (_this.fixed) {
           return;
         }
@@ -434,21 +435,21 @@
           ease: Quart.easeOut,
           onUpdate: _this.updateRadius
         });
-        $(_this.display).css("cursor", "default");
+        _this.display.css("cursor", "default");
         return _this;
       });
       /*
       		Mouse Down
       */
 
-      $(this.display).mousedown(function() {
+      this.display.mousedown(function() {
         if (_this.selected) {
           return;
         }
         _this.fixed = true;
         _this.dragging = true;
-        _this.clickPos.x = event.offsetX + $(_this.container).position().left;
-        _this.clickPos.y = event.offsetY + $(_this.container).position().top;
+        _this.clickPos.x = event.offsetX + _this.container.position().left;
+        _this.clickPos.y = event.offsetY + _this.container.position().top;
         _this.pressTime = new Date().getTime();
         /*
         			Mouse Up
@@ -486,6 +487,12 @@
 
     CircleTouchView.prototype.touchId = 0;
 
+    CircleTouchView.prototype.pinching = false;
+
+    CircleTouchView.prototype.pinchingDistance = 0;
+
+    CircleTouchView.prototype.clickRadius = 0;
+
     function CircleTouchView(display, color, container, isTouchScreen) {
       this.display = display;
       this.color = color != null ? color : "#F66";
@@ -508,15 +515,15 @@
       this.y -= (this.y - this.position.y) * .1;
       this.center.x = this.x + this.radius;
       this.center.y = this.y + this.radius;
-      $(this.content).css({
+      this.content.css({
         "top": this.radius - this.contentHeight * .5,
         "left": this.radius - this.contentWidth * .5
       });
       if (this.dragging) {
         return;
       }
-      $(this.display).css("left", this.x);
-      return $(this.display).css("top", this.y);
+      this.display.css("left", this.x);
+      return this.display.css("top", this.y);
     };
 
     CircleTouchView.prototype.updateRadius = function() {
@@ -532,14 +539,23 @@
       */
 
       var _this = this;
-      $(this.display).bind("touchstart", function(event) {
-        _this.touchId = event.originalEvent.touches.length - 1;
-        _this.touch = event.originalEvent.touches[_this.touchId];
-        _this.fixed = true;
+      this.display.bind("touchstart", function(event) {
+        var touches;
+        touches = event.originalEvent.touches;
+        _this.touchId = touches.length - 1;
+        _this.touch = touches[_this.touchId];
+        _this.pinching = touches.length === 2;
+        _this.clickRadius = _this.radius;
+        if (_this.pinching) {
+          _this.pinchingDistance = new Point(touches[0].pageX, touches[0].pageY).distanceTo(new Point(touches[1].pageX, touches[1].pageY));
+        }
+        if (_this.dragging) {
+          return;
+        }
         _this.dragging = true;
         _this.over = true;
-        _this.clickPos.x = $(_this.container).position().left;
-        _this.clickPos.y = $(_this.container).position().top;
+        _this.clickPos.x = _this.container.position().left;
+        _this.clickPos.y = _this.container.position().top;
         TweenLite.to(_this, .5, {
           radius: _this.originalRadius + 20,
           ease: Quart.easeOut,
@@ -549,11 +565,11 @@
         			Touch End
         */
 
-        $(_this.display).bind("touchend", function(event) {
-          _this.fixed = false;
+        _this.display.bind("touchend", function(event) {
           _this.over = false;
           _this.dragging = false;
           _this.touch = null;
+          _this.pinching = event.originalEvent.touches.length === 2;
           TweenLite.to(_this, .5, {
             radius: _this.originalRadius,
             ease: Quart.easeOut,
@@ -567,8 +583,22 @@
         */
 
         $(window).bind("touchmove", function(event) {
-          _this.fixed = false;
-          return _this.setPos(_this.touch.pageX - _this.clickPos.x - _this.radius, _this.touch.pageY - _this.clickPos.y - _this.radius);
+          var distance;
+          touches = event.originalEvent.touches;
+          distance = 0;
+          if (_this.pinching) {
+            distance = new Point(touches[0].pageX, touches[0].pageY).distanceTo(new Point(touches[1].pageX, touches[1].pageY));
+            _this.radius = _this.originalRadius = distance - _this.pinchingDistance + _this.clickRadius;
+            _this.updateRadius();
+            _this.center.x = _this.x + _this.radius;
+            _this.center.y = _this.y + _this.radius;
+            return _this.content.css({
+              "top": _this.radius - _this.contentHeight * .5,
+              "left": _this.radius - _this.contentWidth * .5
+            });
+          } else {
+            return _this.setPos(_this.touch.pageX - _this.clickPos.x - _this.radius, _this.touch.pageY - _this.clickPos.y - _this.radius);
+          }
         });
         return _this;
       });

@@ -6,7 +6,7 @@ class CircleView extends AbstractCircle
 		super(@display, @color, @container)
 
 	setPos: (x, y) ->
-		TweenLite.killTweensOf($(@display))
+		TweenLite.killTweensOf(@display)
 		super(x, y)
 
 	setSelected: (selected) ->
@@ -22,42 +22,42 @@ class CircleView extends AbstractCircle
 		@y	-= (@y - @position.y) * .1
 		@center.x = @x + @radius
 		@center.y = @y + @radius
-		$(@content).css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
+		@content.css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
 		return if @dragging
-		TweenLite.to($(@display), 1, { css:{ left:@x, top:@y }, ease:Quart.easeOut })
+		TweenLite.to(@display, .2, { css:{ left:@x, top:@y }, ease:Quart.easeOut })
 
 	setupEvents: ->
 		###
 		Roll Over
 		###
-		$(@display).mouseenter =>
+		@display.mouseenter =>
 			return if @fixed
 			return if @selected
 			@over = true
 			TweenLite.to(@, 1, { radius:@originalRadius + 50, ease:Quart.easeOut, onUpdate:@updateRadius });
-			$(@display).css("cursor", "pointer")
+			@display.css("cursor", "pointer")
 			@
 
 		###
 		Roll Out
 		###
-		$(@display).mouseleave =>
+		@display.mouseleave =>
 			return if @fixed
 			return if @selected
 			@over = false
 			TweenLite.to(@, 1, { radius:@originalRadius, ease:Quart.easeOut, onUpdate:@updateRadius });
-			$(@display).css("cursor", "default")
+			@display.css("cursor", "default")
 			@
 
 		###
 		Mouse Down
 		###
-		$(@display).mousedown =>
+		@display.mousedown =>
 			return if @selected
 			@fixed = true
 			@dragging = true
-			@clickPos.x = event.offsetX + $(@container).position().left
-			@clickPos.y = event.offsetY + $(@container).position().top
+			@clickPos.x = event.offsetX + @container.position().left
+			@clickPos.y = event.offsetY + @container.position().top
 			@pressTime = new Date().getTime()
 
 			###

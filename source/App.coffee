@@ -4,11 +4,11 @@ $ ->
 	@navigation	= $("#navigation")
 	@isMobile	= /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
 
-	#if(!@isMobile)
-		#@navigation.css("display":"block")
+	if(!@isMobile)
+		@navigation.css("display":"block")
 
-	$(window).resize =>
-		padding = parseFloat(@main.css("padding-left")) * 2;
+	#$(window).resize =>
+		#padding = parseFloat(@main.css("padding-left")) * 2;
 		#if(@isMobile)
 		#	@main.css("width", @window.width() - padding);
 		#	@main.css("min-width", @window.width() - padding);
@@ -19,7 +19,7 @@ $ ->
 		#	@main.css("height", @window.height() - padding);
 		#@
 
-	$(window).trigger "resize"
+	#$(window).trigger "resize"
 
 	document.body.addEventListener "touchmove", (event) ->
 		event.preventDefault()

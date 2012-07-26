@@ -113,7 +113,7 @@ ul, li {
 	background: #FFF url("../images/logo.png") no-repeat center 0px;
 	width: 240px;
 	height: 100%;
-	display: block;
+	display: none;
 	position: absolute;
 	border-left: 3px solid #00CC99;
 	-webkit-box-shadow:  2px 0px 8px 0px rgba(0, 0, 0, .1);

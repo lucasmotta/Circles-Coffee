@@ -1,17 +1,20 @@
 class AppView
 
-	items	: []
-	colors	: ["#C9D5A8", "#871F3B", "#F66", "#0c9"]
-	center 	: null
-	id		: 0
+	items			: []
+	colors			: ["#C9D5A8", "#871F3B", "#F66", "#0c9"]
+	center			: null
+	id				: 0
+	currentItem		: null
+	isTouchScreen	: false
 
 	###
 	An <ul> id that contains all the list items (<li>)
 	@param		container		Id of your list
 	###
 	constructor: (@container) ->
-		@setupItems()
+		@isTouchScreen = "ontouchstart" of document.documentElement
 		@center	= new Point($(@container).width() * .5, $(@container).height() * .5)
+		@setupItems()
 		@id		= setInterval(@updateItems, 30)
 
 	###
@@ -22,9 +25,11 @@ class AppView
 		i		= list.length
 		c		= null
 
+		CircleClass = (if @isTouchScreen then CircleTouchView else CircleView)
+
 		while(i-- > 0)
-			c = new CircleView(list[i], @colors[i % @colors.length])
-			c.container = @container
+			c = new CircleClass(list[i], @colors[i % @colors.length], @container)
+			c.changed.add(@onItemSelected)
 			@items.push(c)
 		@
 
@@ -35,11 +40,11 @@ class AppView
 	###
 	compareItems: (a, b) ->
 		return if a.fixed
-		angle		= @getAngle(a, b)
-		distance	= @getDistance(a, b)
+		angle		= a.center.angleTo(b.center)
+		distance	= a.center.distanceTo(b.center)
 		margin		= 20
 		minDistance	= a.radius + b.radius + margin
-		force		= .9
+		force		= .8
 
 		if(distance < minDistance)
 			a.position.x	+= Math.sin(angle) * (minDistance - distance) * force
@@ -63,30 +68,18 @@ class AppView
 			@items[i].update(@center)
 			while j < length
 				if(i isnt j)
-					@compareItems(@items[i], @items[j])
+					if(@items[i].priority <= @items[j].priority)
+						@compareItems(@items[i], @items[j])
 				j++
 			@items[i].apply()
 			i++
 		@
 
 	###
-	Get the center distance between two different items
-	@param		a 				First item
-	@param		b 				Second item
+	Method for when the item is selected (clicked)
 	###
-	getDistance: (a, b) ->
-		x	= b.center.x - a.center.x
-		y	= b.center.y - a.center.y
-		x	= x * x
-		y	= y * y
-		Math.sqrt(x + y)
-
-	###
-	Get the angle between two different items
-	@param		a 				First item
-	@param		b 				Second item
-	###
-	getAngle: (a, b, rotation = 0) ->
-		x	= a.center.x - b.center.x
-		y	= a.center.y - b.center.y
-		Math.atan2(x, y)
+	onItemSelected: (target) =>
+		if(@currentItem != null)
+			@currentItem.setSelected(false)
+		@currentItem = target
+		@currentItem.setSelected(true)

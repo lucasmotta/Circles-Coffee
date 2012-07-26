@@ -24,31 +24,20 @@ ul#circles {
 }
 
 ul#circles li {
-	visibility: "hidden";
+	display: none;
 	position: absolute;
 	background: #F66;
 	font-size: 14px;
-	color: #FFF;
-	font-family: "ProximaNovaRgBold", Helvetica, Arial, sans-serif;
 
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
-
-	-webkit-box-shadow: inset 0px -10px 0px 0px rgba(1, 1, 1, .05);
-	box-shadow: inset 0px -10px 0px 0px rgba(1, 1, 1, .05);
-
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 
 ul#circles li span {
 	position: absolute;
-	text-shadow: 0px -1px 0px rgba(1, 1, 1, .2);
-	opacity: .8;
+	color: #000;
+	opacity: .15;
+	font-family: "ProximaNovaRgBold", Helvetica, Arial, sans-serif;
 }
 
 /*----------------------------------------------

@@ -114,17 +114,18 @@ ul, li {
 	width: 240px;
 	height: 100%;
 	display: block;
-	float:left;
+	position: absolute;
 	border-left: 3px solid #00CC99;
 	-webkit-box-shadow:  2px 0px 8px 0px rgba(0, 0, 0, .1);
 	box-shadow:  2px 0px 8px 0px rgba(0, 0, 0, .1);
+	z-index: 1000;
 }
 
 #navigation ul {
 	margin-top: 200px;
 }
 
-#navigation ul a, #navigation ul .active {
+#navigation ul .active {
 	display: block;
 	padding:8px 20px;
 	width: 200px;
@@ -144,16 +145,25 @@ ul, li {
 	background-position: left 14px;
 }
 
+#navigation ul a {
+	color: #666;
+}
+
 #navigation ul a:hover {
 	color: #00CC99;
-	background-position: left 14px;
+}
+
+#navigation ul p {
+	padding: 0 0 5px 0;
+	margin: 0;
+	font-size:12px;
+	line-height: 150%;
+	font-family: "ProximaNovaRgRegular", Helvetica, Arial, sans-serif;
 }
 
 #navigation ul span {
 	display: block;
 	color:#999;
-	font-family: "ProximaNovaRgRegular", Helvetica, Arial, sans-serif;
-	font-size:12px;
 	padding:0;
 	margin:0;
 }
@@ -192,9 +202,8 @@ ul, li {
  *--------------------------------------------*/
 
 #main {
-	float: left;
 	display: block;
-	width: 640px;
+	width: 100%;
 	height: 100%;
 	padding: 20px;
 	overflow: hidden;

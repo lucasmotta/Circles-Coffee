@@ -12,17 +12,23 @@ class CircleView extends AbstractCircle
 	setSelected: (selected) ->
 		@selected = selected
 		@priority = selected ? 1 : 0
-		#if(@selected)
-		#	TweenLite.to(@, 1, { radius:200, ease:Quart.easeOut, transformOrigin:"50% 50%", onUpdate:@updateRadius });
-		#else
-		#	TweenLite.to(@, 1, { radius:@originalRadius, ease:Quart.easeOut, transformOrigin:"50% 50%", onUpdate:@updateRadius });
+		@display.css("cursor", "default")
+
+		TweenLite.killTweensOf(@)
+
+		if(@selected)
+			TweenLite.to(@, 1, { radius:@openedRadius, ease:Quart.easeOut, onUpdate:@updateRadius, onComplete:@showContent });
+		else
+			@hideContent()
+			TweenLite.to(@, 1, { radius:@originalRadius, ease:Quart.easeOut, onUpdate:@updateRadius, delay:.2 });
 
 	apply: ->
 		@x	-= (@x - @position.x) * .1
 		@y	-= (@y - @position.y) * .1
 		@center.x = @x + @radius
 		@center.y = @y + @radius
-		@content.css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
+		if(@selected)
+			@content.css("top":@radius - @contentHeight * .5, "left":@radius - @contentWidth * .5)
 		return if @dragging
 		TweenLite.to(@display, .2, { css:{ left:@x, top:@y }, ease:Quart.easeOut })
 
@@ -79,6 +85,9 @@ class CircleView extends AbstractCircle
 				@setPos(event.pageX - @clickPos.x, event.pageY - @clickPos.y)
 				@
 			@
+
+		@display.dblclick =>
+			@changed.dispatch(@)
 		@
 
 		

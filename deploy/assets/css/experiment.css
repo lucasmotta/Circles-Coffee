@@ -26,20 +26,23 @@ ul#circles {
 ul#circles li {
 	display: none;
 	position: absolute;
-	background: #F66;
-	font-size: 14px;
-
+	overflow: none;
+	background: #F66 url("../images/icon-plus.png") no-repeat center center;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 }
 
-ul#circles li span {
+ul#circles li p {
+	padding: 0;
+	margin: 0;
+	font-size: 48px;
 	position: absolute;
-	color: #000;
-	opacity: .15;
+	text-align: center;
+	display: none;
+	color: #46202E;
+	opacity: 0;
 	font-family: "ProximaNovaRgBold", Helvetica, Arial, sans-serif;
 }
-
 /*----------------------------------------------
  * Navigation
  *--------------------------------------------*/

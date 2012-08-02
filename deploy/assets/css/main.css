@@ -168,6 +168,12 @@ ul, li {
 	margin:0;
 }
 
+#navigation hr {
+	border: none;
+	border-bottom: 1px solid #EEE;
+	margin: 9px 0 10px 0;
+}
+
 #navigation #footer {
 	padding:20px;
 	width: 200px;

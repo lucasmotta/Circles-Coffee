@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"pinc",
+				"pinchingDistance"
+			],
+			[
+				"ping",
+				"pinchingDistance"
+			],
+			[
+				"container",
+				"container_id"
+			],
+			[
+				"a",
+				"a	Tag"
+			],
+			[
+				"naviga",
+				"navigation"
+			],
+			[
+				"rad",
+				"radiusDiff"
+			],
+			[
+				"content",
+				"contentHeight"
+			],
+			[
+				"mome",
+				"momentumY"
+			],
+			[
 				"_cli",
 				"_clickY"
 			],
@@ -34,10 +66,6 @@
 			[
 				"ul",
 				"ul	Tag"
-			],
-			[
-				"a",
-				"a	Tag"
 			],
 			[
 				"img",
@@ -79,7 +107,23 @@
 			"file": "deploy/index.html",
 			"settings":
 			{
-				"buffer_size": 1575,
+				"buffer_size": 2342,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "deploy/assets/css/experiment.css",
+			"settings":
+			{
+				"buffer_size": 954,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "deploy/assets/css/main.css",
+			"settings":
+			{
+				"buffer_size": 4801,
 				"line_ending": "Unix"
 			}
 		},
@@ -87,17 +131,60 @@
 			"file": "source/App.coffee",
 			"settings":
 			{
-				"buffer_size": 18,
+				"buffer_size": 849,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "class AppView\n\n	items			: []\n	colors			: [\"#C9D5A8\", \"#871F3B\", \"#F66\", \"#0c9\"]\n	center			: null\n	id				: 0\n	container 		: null\n	currentItem		: null\n	isTouchScreen	: false\n\n	###\n	An <ul> id that contains all the list items (<li>)\n	@param		container_id	Id of your list\n	###\n	constructor: (@container_id) ->\n		@container = $(@container_id)\n		@isTouchScreen = \"ontouchstart\" of document.documentElement\n		@center	= new Point(@container.width() * .5, @container.height() * .5)\n		@setupItems()\n		@id		= setInterval(@updateItems, 30)\n\n	###\n	Setup the items and push them to an array\n	###\n	setupItems: ->\n		list	= @container.children()\n		i		= list.length\n		c		= null\n\n		CircleClass = (if @isTouchScreen then CircleTouchView else CircleView)\n\n		while(i-- > 0)\n			c = new CircleClass($(list[i]), @colors[i % @colors.length], @container)\n			c.changed.add(@onItemSelected)\n			@items.push(c)\n		@\n\n	### \n	Update the position of all the items\n	###\n	updateItems: =>\n		length		= @items.length\n		i			= 0\n		j			= 0\n		item		= null\n\n		@center.x	= @container.width() * .5\n		@center.y	= @container.height() * .5\n\n		while i < length\n			j = 0\n			@items[i].update(@center)\n			while j < length\n				if(i isnt j)\n					if(@items[i].priority <= @items[j].priority)\n						@items[i].compare(@items[j])\n				j++\n			@items[i].apply()\n			i++\n		@\n\n	###\n	Method for when the item is selected (clicked)\n	###\n	onItemSelected: (target) =>\n		if(@currentItem != null)\n			@currentItem.setSelected(false)\n		@currentItem = target\n		@currentItem.setSelected(true)",
+			"file": "source/AppView.coffee",
+			"file_size": 1516,
+			"file_write_time": 1343313077000000,
+			"settings":
+			{
+				"buffer_size": 1516,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/CircleView.coffee",
+			"settings":
+			{
+				"buffer_size": 2070,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/CircleTouchView.coffee",
+			"settings":
+			{
+				"buffer_size": 2389,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "deploy/assets/js/app/App.js",
+			"settings":
+			{
+				"buffer_size": 16534,
 				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "Packages/User/CoffeeScript.sublime-build",
+	"build_system": "Coffee",
 	"command_palette":
 	{
-		"height": 47.0,
+		"height": 67.0,
 		"selected_items":
 		[
+			[
+				"Instal",
+				"Package Control: Install Package"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			],
 			[
 				"Install",
 				"Package Control: Install Package"
@@ -113,10 +200,6 @@
 			[
 				"jquery",
 				"Set Syntax: jQuery (JavaScript)"
-			],
-			[
-				"Instal",
-				"Package Control: Install Package"
 			],
 			[
 				"Commit",
@@ -143,7 +226,7 @@
 				"Set Syntax: HTML"
 			]
 		],
-		"width": 575.0
+		"width": 593.0
 	},
 	"console":
 	{
@@ -160,6 +243,30 @@
 	},
 	"file_history":
 	[
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/source/AbstractCircle.coffee",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/circles-coffee.sublime-project",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/circles-coffee.sublime-workspace",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/README.md",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/source/Point.coffee",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/source/CircleTouchView.coffee",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/source/AppView.coffee",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/assets/css/main.css",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/scripts/compile.sh",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/source/CircleView.coffee",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/assets/js/main.js",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/assets/js/app/App.js",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/source/App.coffee",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/assets/js/App.js",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Alignment/Default (OSX).sublime-keymap",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/CoffeeScript.sublime-settings",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
+		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Base File.sublime-settings",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/assets/js/view/CircleView.js",
+		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/scripts/coffee.sh",
 		"/Users/lucasmotta/Google Drive/Lab/circles-coffee/deploy/index.html",
 		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/CoffeeScript.sublime-build",
 		"/Users/lucasmotta/.htaccess",
@@ -169,20 +276,13 @@
 		"/Users/lucasmotta/Google Drive/Lab/circles/output/index.html",
 		"/Users/lucasmotta/Google Drive/Lab/circles/static/assets/css/step01.css",
 		"/Users/lucasmotta/Projects/VictorinoxFlash/deploy/data/en/labels.xml",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Alignment/Default (OSX).sublime-keymap",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Base File.sublime-settings",
 		"/Users/lucasmotta/Google Drive/Lab/circles/static/assets/js/main.js",
 		"/Users/lucasmotta/Google Drive/Lab/circles/content/step01.css",
 		"/Users/lucasmotta/Google Drive/Lab/circles/content/stylesheet.css",
 		"/Users/lucasmotta/Projects/VictorinoxFlash/deploy/js/jquery",
 		"/Users/lucasmotta/Google Drive/Lab/circles/config.yaml",
 		"/Users/lucasmotta/Google Drive/Lab/circles/lib/static.rb",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/lucasmotta/Google Drive/Lab/circles/content/index.html",
-		"/Users/lucasmotta/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/lucasmotta/Google Drive/Lab/lines/lib/default.rb",
 		"/Users/lucasmotta/Google Drive/Lab/lines/Rules",
 		"/Users/lucasmotta/Google Drive/Lab/lines/content/angelo.html",
@@ -282,6 +382,33 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$(",
+			"display",
+			"@container",
+			"user-sel",
+			"select",
+			"console",
+			"setPos",
+			"center",
+			"updateP",
+			"document",
+			"console",
+			"position",
+			"velocity",
+			"position",
+			"get",
+			"browser",
+			"command+",
+			"centerX",
+			"x =",
+			"3",
+			"mass",
+			"bind",
+			"@items",
+			"console",
+			"getAng",
+			"$",
+			"£",
 			"ff6666",
 			"radiussize",
 			"radius",
@@ -395,21 +522,195 @@
 					"file": "deploy/index.html",
 					"settings":
 					{
-						"buffer_size": 1575,
+						"buffer_size": 2342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								665,
-								665
+								1711,
+								1711
 							]
 						],
 						"settings":
 						{
 							"buffer_scroll_name": "744a8499",
 							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "deploy/assets/css/experiment.css",
+					"settings":
+					{
+						"buffer_size": 954,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								651,
+								651
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "87183dbe",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "deploy/assets/css/main.css",
+					"settings":
+					{
+						"buffer_size": 4801,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2827,
+								2827
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "9e7b97a9",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2284.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "source/App.coffee",
+					"settings":
+					{
+						"buffer_size": 849,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								296,
+								296
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "fd4b9bdd",
+							"syntax": "Packages/CoffeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "source/AppView.coffee",
+					"settings":
+					{
+						"buffer_size": 1516,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "9506b508",
+							"syntax": "Packages/CoffeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "source/CircleView.coffee",
+					"settings":
+					{
+						"buffer_size": 2070,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1170,
+								1170
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "4269e2f9",
+							"syntax": "Packages/CoffeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "source/CircleTouchView.coffee",
+					"settings":
+					{
+						"buffer_size": 2389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1575,
+								1575
+							]
+						],
+						"settings":
+						{
+							"buffer_scroll_name": "646fc6f4",
+							"syntax": "Packages/CoffeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -425,25 +726,27 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "source/App.coffee",
+					"buffer": 7,
+					"file": "deploy/assets/js/app/App.js",
 					"settings":
 					{
-						"buffer_size": 18,
+						"buffer_size": 16534,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18,
-								18
+								602,
+								602
 							]
 						],
 						"settings":
 						{
-							"buffer_scroll_name": "fd4b9bdd",
-							"syntax": "Packages/CoffeScript/CoffeeScript.tmLanguage"
+							"buffer_scroll_name": "97b8731b",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -451,11 +754,6 @@
 					},
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -493,7 +791,7 @@
 		"cols":
 		[
 			0.0,
-			0.371293668122,
+			0.303700191048,
 			0.652068094978,
 			1.0
 		],
@@ -505,6 +803,10 @@
 	},
 	"menu_visible": true,
 	"output.exec":
+	{
+		"height": 197.0
+	},
+	"output.find_results":
 	{
 		"height": 100.0
 	},
@@ -518,6 +820,54 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"point",
+				"source/Point.coffee"
+			],
+			[
+				"abstra",
+				"source/AbstractCircle.coffee"
+			],
+			[
+				"appv",
+				"source/AppView.coffee"
+			],
+			[
+				"main.cs",
+				"deploy/assets/css/main.css"
+			],
+			[
+				"abs",
+				"source/AbstractCircle.coffee"
+			],
+			[
+				"script",
+				"scripts/compile.sh"
+			],
+			[
+				"circlevie",
+				"source/CircleView.coffee"
+			],
+			[
+				"appvie",
+				"source/AppView.coffee"
+			],
+			[
+				"main.css",
+				"deploy/assets/css/main.css"
+			],
+			[
+				"app",
+				"source/App.coffee"
+			],
+			[
+				"main.js",
+				"deploy/assets/js/main.js"
+			],
+			[
+				"app.js",
+				"deploy/assets/js/app/App.js"
+			],
 			[
 				"",
 				"js/libs/jquery-1.7.1.min.js"

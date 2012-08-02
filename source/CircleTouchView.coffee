@@ -2,6 +2,7 @@ class CircleTouchView extends AbstractCircle
 	
 	touch 					: null
 	touchId					: 0
+	lastTouch				: 0
 	pinching				: false
 	pinchingDistance		: 0
 	clickRadius				: 0
@@ -32,6 +33,9 @@ class CircleTouchView extends AbstractCircle
 		###
 		Touch Start
 		###
+		@display.bind "doubletap", (event) =>
+			console.log "double tap"
+
 		@display.bind "touchstart", (event) =>
 			touches 	= event.originalEvent.touches
 			@touchId	= touches.length - 1
@@ -70,6 +74,7 @@ class CircleTouchView extends AbstractCircle
 			###
 			$(window).bind "touchmove", (event) =>
 				touches 	= event.originalEvent.touches
+				@pinching	= touches.length == 2
 				distance 	= 0
 				if @pinching
 					distance = new Point(touches[0].pageX, touches[0].pageY).distanceTo(new Point(touches[1].pageX, touches[1].pageY))

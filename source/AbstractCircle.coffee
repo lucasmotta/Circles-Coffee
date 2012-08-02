@@ -13,6 +13,7 @@ class AbstractCircle extends Point
 	color 					: 0
 	radius					: 0
 	originalRadius			: 0
+	openedRadius			: 200
 
 	priority				: 0
 
@@ -33,19 +34,22 @@ class AbstractCircle extends Point
 	constructor: (@display, @color = "#F66", @container) ->
 		super(0, 0)
 
-		@radius			= 30 + Math.random() * 60
+		@radius			= parseFloat(@display.attr("data-radius"))
 		@originalRadius	= @radius
 		@momentum		= new Point()
 		@position		= new Point()
 		@center			= new Point()
 		@clickPos		= new Point()
 
-		@setPos(@container.width() * Math.random(), @container.height() * Math.random())
+		@setPos(@container.width() * .5, @container.height())
 		@display.css("display":"inline", "width":@radius * 2, "height":@radius * 2, "background-color":@color)
 
-		@content		= $(@display.find("span"))
+		@content		= $(@display.find("p"))
 		@contentHeight	= @content.height()
 		@contentWidth	= @content.width()
+		@content.css("display":"inline", "background-color":@color)
+		@content.remove()
+		@openedRadius	= 200
 		@changed		= new signals.Signal()
 
 		@setupEvents()
@@ -64,6 +68,13 @@ class AbstractCircle extends Point
 	Setup the items and push them to an array
 	###
 	setSelected: -> console.log("Warning: This method should be overridden")
+
+	showContent: =>
+		@display.append(@content)
+		TweenLite.to(@content, .5, { css:{ opacity:1 }, ease:Quart.easeOut })
+
+	hideContent: =>
+		TweenLite.to(@content, .2, { css:{ opacity:0 }, ease:Quart.easeOut, onComplete:=> @content.remove() })
 
 	###
 	Set the position of your display

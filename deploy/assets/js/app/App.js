@@ -97,6 +97,8 @@
 
     AbstractCircle.prototype.originalRadius = 0;
 
+    AbstractCircle.prototype.openedRadius = 200;
+
     AbstractCircle.prototype.priority = 0;
 
     AbstractCircle.prototype.container = null;
@@ -126,23 +128,33 @@
       this.container = container;
       this.updateRadius = __bind(this.updateRadius, this);
 
+      this.hideContent = __bind(this.hideContent, this);
+
+      this.showContent = __bind(this.showContent, this);
+
       AbstractCircle.__super__.constructor.call(this, 0, 0);
-      this.radius = 30 + Math.random() * 60;
+      this.radius = parseFloat(this.display.attr("data-radius"));
       this.originalRadius = this.radius;
       this.momentum = new Point();
       this.position = new Point();
       this.center = new Point();
       this.clickPos = new Point();
-      this.setPos(this.container.width() * Math.random(), this.container.height() * Math.random());
+      this.setPos(this.container.width() * .5, this.container.height());
       this.display.css({
         "display": "inline",
         "width": this.radius * 2,
         "height": this.radius * 2,
         "background-color": this.color
       });
-      this.content = $(this.display.find("span"));
+      this.content = $(this.display.find("p"));
       this.contentHeight = this.content.height();
       this.contentWidth = this.content.width();
+      this.content.css({
+        "display": "inline",
+        "background-color": this.color
+      });
+      this.content.remove();
+      this.openedRadius = 200;
       this.changed = new signals.Signal();
       this.setupEvents();
     }
@@ -172,6 +184,29 @@
 
     AbstractCircle.prototype.setSelected = function() {
       return console.log("Warning: This method should be overridden");
+    };
+
+    AbstractCircle.prototype.showContent = function() {
+      this.display.append(this.content);
+      return TweenLite.to(this.content, .5, {
+        css: {
+          opacity: 1
+        },
+        ease: Quart.easeOut
+      });
+    };
+
+    AbstractCircle.prototype.hideContent = function() {
+      var _this = this;
+      return TweenLite.to(this.content, .2, {
+        css: {
+          opacity: 0
+        },
+        ease: Quart.easeOut,
+        onComplete: function() {
+          return _this.content.remove();
+        }
+      });
     };
 
     /*
@@ -370,9 +405,27 @@
 
     CircleView.prototype.setSelected = function(selected) {
       this.selected = selected;
-      return this.priority = selected != null ? selected : {
+      this.priority = selected != null ? selected : {
         1: 0
       };
+      this.display.css("cursor", "default");
+      TweenLite.killTweensOf(this);
+      if (this.selected) {
+        return TweenLite.to(this, 1, {
+          radius: this.openedRadius,
+          ease: Quart.easeOut,
+          onUpdate: this.updateRadius,
+          onComplete: this.showContent
+        });
+      } else {
+        this.hideContent();
+        return TweenLite.to(this, 1, {
+          radius: this.originalRadius,
+          ease: Quart.easeOut,
+          onUpdate: this.updateRadius,
+          delay: .2
+        });
+      }
     };
 
     CircleView.prototype.apply = function() {
@@ -380,10 +433,12 @@
       this.y -= (this.y - this.position.y) * .1;
       this.center.x = this.x + this.radius;
       this.center.y = this.y + this.radius;
-      this.content.css({
-        "top": this.radius - this.contentHeight * .5,
-        "left": this.radius - this.contentWidth * .5
-      });
+      if (this.selected) {
+        this.content.css({
+          "top": this.radius - this.contentHeight * .5,
+          "left": this.radius - this.contentWidth * .5
+        });
+      }
       if (this.dragging) {
         return;
       }
@@ -472,6 +527,9 @@
         });
         return _this;
       });
+      this.display.dblclick(function() {
+        return _this.changed.dispatch(_this);
+      });
       return this;
     };
 
@@ -486,6 +544,8 @@
     CircleTouchView.prototype.touch = null;
 
     CircleTouchView.prototype.touchId = 0;
+
+    CircleTouchView.prototype.lastTouch = 0;
 
     CircleTouchView.prototype.pinching = false;
 
@@ -539,6 +599,9 @@
       */
 
       var _this = this;
+      this.display.bind("doubletap", function(event) {
+        return console.log("double tap");
+      });
       this.display.bind("touchstart", function(event) {
         var touches;
         touches = event.originalEvent.touches;
@@ -585,6 +648,7 @@
         $(window).bind("touchmove", function(event) {
           var distance;
           touches = event.originalEvent.touches;
+          _this.pinching = touches.length === 2;
           distance = 0;
           if (_this.pinching) {
             distance = new Point(touches[0].pageX, touches[0].pageY).distanceTo(new Point(touches[1].pageX, touches[1].pageY));

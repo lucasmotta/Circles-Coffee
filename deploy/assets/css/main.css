@@ -233,3 +233,15 @@ ul, li {
 	color:#00CC99;
 }
 
+#share {
+	position: absolute;
+	display: none;
+	z-index: 10000;
+	bottom: 10px;
+	right: 0;
+}
+
+#share .fb-like {
+	top: -3px;
+}
+

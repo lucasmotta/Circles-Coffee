@@ -7,11 +7,12 @@
 
   $(function() {
     this.window = $(window);
-    this.main = $("#main");
-    this.navigation = $("#navigation");
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
     if (!this.isMobile) {
-      this.navigation.css({
+      $("#navigation").css({
+        "display": "block"
+      });
+      $("#share").css({
         "display": "block"
       });
     }
